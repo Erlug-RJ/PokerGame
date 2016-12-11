@@ -2,26 +2,30 @@ defmodule Core.RankingTest do
   use ExUnit.Case
   use Quixir
   alias Core.Ranking
-  alias Core.Card
 
-
-  test "this combination return 0 (High card -> 2d, 6h, 10c, Js, Kh)" do
-    card1 = %Card{suit: :diamonds, rank: 2}
-    card2 = %Card{suit: :hearts, rank: 6}
-    card3 = %Card{suit: :clubs, rank: 10}
-    card4 = %Card{suit: :spades, rank: 11}
-    card5 = %Card{suit: :hearts, rank: 13}
-
-    assert Ranking.get_value(card1, card2, card3, card4, card5) == 0
-  end
 
   test "this combination return 1 (Pair -> 8s, 6h, 2d, Ah, Ac)" do
-    card1 = %Card{suit: :spades, rank: 8}
-    card2 = %Card{suit: :hearts, rank: 6}
-    card3 = %Card{suit: :diamonds, rank: 2}
-    card4 = %Card{suit: :hearts, rank: 14}
-    card5 = %Card{suit: :clubs, rank: 14}
-
-    assert Ranking.get_value(card1, card2, card3, card4, card5) == 1
+    hand = [{8, :spades}, {6, :hearts}, {2, :diamonds}, {14, :hearts}, {14, :clubs}]   
+    assert Ranking.get_value(Enum.sort(hand)) == 1
+  end
+  
+  test "this combination return 1 (Pair -> 2s, 2h, 6d, 8h, Ac)" do
+    hand = [{2, :spades}, {2, :hearts}, {6, :diamonds}, {8, :hearts}, {14, :clubs}]
+    assert Ranking.get_value(Enum.sort(hand)) == 1
+  end
+  
+  test "this combination return 1 (Pair -> 2s, 6h, 6d, 8h, Ac)" do
+    hand = [{2, :spades}, {6, :hearts}, {6, :diamonds}, {8, :hearts}, {14, :clubs}]
+    assert Ranking.get_value(Enum.sort(hand)) == 1
+  end
+  
+  test "this combination return 1 (Pair -> 2s, 6h, 8d, 8h, Ac)" do
+    hand = [{2, :spades}, {6, :hearts}, {8, :diamonds}, {8, :hearts}, {14, :clubs}]
+    assert Ranking.get_value(Enum.sort(hand)) == 1
+  end
+  
+  test "this combination return 0 (High Card -> )"  do
+    hand = [{3, :diamonds}, {6, :hearts}, {10, :clubs}, {11, :spades}, {13, :hearts}]
+    assert Ranking.get_value(Enum.sort(hand)) == 0
   end
 end

@@ -1,23 +1,12 @@
 defmodule Core.Ranking do
 
-  def get_value(card1, card2, card3, card4, card5) do
-    card_list = [card1, card2, card3, card4, card5]
-    couple =
-      card_list
-      |> Enum.group_by(fn card -> card.rank end)
-      |> Map.values
-      |> Enum.filter(fn count -> Enum.count(count) == 2 end)
-      |> List.flatten
+  def get_value([]), do: 1
 
-    IO.puts "================="
-    IO.inspect(couple)
-    IO.puts "================="
+  def get_value([{a, _}, {a, _}, {_b, _}, {_c, _}, {_d, _}]), do: 1
+  def get_value([{_a, _}, {b, _}, {b, _}, {_c, _}, {_d, _}]), do: 1
+  def get_value([{_a, _}, {_b, _}, {c, _}, {c, _}, {_d, _}]), do: 1
+  def get_value([{_a, _}, {_b, _}, {_c, _}, {d, _}, {d, _}]), do: 1
 
-    if Enum.count(couple) == 2 do
-      1
-    else
-      0
-    end
-  end
+  def get_value([{_a, _}, {_b, _}, {_c, _}, {_d, _}, {_e, _}]), do: 0
 
 end
