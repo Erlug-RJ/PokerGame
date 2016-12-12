@@ -1,6 +1,8 @@
 defmodule Core.Ranking do
 
-  
+  def get_value([{_a, _}, {_b, _}, {c, _}, {c, _}, {c,_}]), do: 3
+  def get_value([{a, _}, {a, _}, {a, _}, {_b, _}, {_c, _}]), do: 3
+  def get_value([{_a, _}, {b, _}, {b, _}, {b, _}, {_c, _}]), do: 3
 
   def get_value([{a, _}, {a, _}, {b, _}, {b, _}, {_c, _}]), do: 2
   def get_value([{_a, _}, {b, _}, {b, _}, {c, _}, {c, _}]), do: 2

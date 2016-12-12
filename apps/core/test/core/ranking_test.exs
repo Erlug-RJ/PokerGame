@@ -3,6 +3,21 @@ defmodule Core.RankingTest do
   use Quixir
   alias Core.Ranking
 
+  test "this combinatin return 3 (Three of a Kind -> 5c, 8d, Jc, Jh, Jd)" do
+    hand = [{5, :clubs}, {8, :diamonds}, {11, :clubs}, {11, :hearts}, {11, :diamonds}]
+    assert Ranking.get_value(hand) == 3
+  end
+
+  test "this combinatin return 3 (Three of a Kind -> Jc, Jh, Jd, 5c, 8d)" do
+    hand = [{11, :clubs}, {11, :hearts}, {11, :diamonds}, {5, :clubs}, {8, :diamonds}]
+    assert Ranking.get_value(hand) == 3
+  end
+
+  test "this combinatin return 3 (Three of a Kind -> 5c, Jc, Jh, Jd, 8d)" do
+    hand = [{5, :clubs}, {11, :clubs}, {11, :hearts}, {11, :diamonds}, {8, :diamonds}]
+    assert Ranking.get_value(hand) == 3
+  end
+
   test "this combination return 2 (Two Pair -> 10d, 10c, 6s, 6c, kd)" do
     hand = [{10, :diamonds}, {10, :clubs}, {6, :spades}, {6, :clubs}, {13, :diamonds}]
     assert Ranking.get_value(hand) == 2
