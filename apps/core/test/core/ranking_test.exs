@@ -8,6 +8,11 @@ defmodule Core.RankingTest do
     assert Ranking.get_value(hand) == 4
   end
 
+  test "this combination can not return 4 (Straight -> 2d, 3c, 4s, 5d, 6c)" do
+    hand = [{2, :diamonds}, {2, :clubs}, {4, :spades}, {5, :diamonds}, {6, :clubs}]
+    assert Ranking.get_value(hand) != 4
+  end
+
   test "this combinatin return 3 (Three of a Kind -> 5c, 8d, Jc, Jh, Jd)" do
     hand = [{5, :clubs}, {8, :diamonds}, {11, :clubs}, {11, :hearts}, {11, :diamonds}]
     assert Ranking.get_value(hand) == 3
