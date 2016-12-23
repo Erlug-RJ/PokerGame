@@ -3,6 +3,11 @@ defmodule Core.RankingTest do
   use Quixir
   alias Core.Ranking
 
+  test "this combination return 4 (Straight -> Ac, 2d, 3c, 4s, 5d)" do
+    hand = [{14, :clubs}, {2, :diamonds}, {3, :clubs}, {4, :spades}, {5, :diamonds}]
+    assert Ranking.get_value(hand) == 4
+  end
+
   test "this combination return 4 (Straight -> 2d, 3c, 4s, 5d, 6c)" do
     hand = [{2, :diamonds}, {3, :clubs}, {4, :spades}, {5, :diamonds}, {6, :clubs}]
     assert Ranking.get_value(hand) == 4
