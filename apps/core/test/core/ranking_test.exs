@@ -3,6 +3,11 @@ defmodule Core.RankingTest do
   use Quixir
   alias Core.Ranking
 
+  test "this combination return 9 (Royal Flush -> 10h, Jh, Qh, Kh, Ah)" do
+    hand = [{10, :hearts}, {11, :hearts}, {12, :hearts}, {13, :hearts}, {14, :hearts}]
+    assert Ranking.get_value(hand) == 9
+  end
+
   test "this combination return 8 (Straight Flush -> 5c, 6c, 7c, 8c, 9c)" do
     hand = [{5, :clubs}, {6, :clubs}, {7, :clubs}, {8, :clubs}, {9, :clubs}]
     assert Ranking.get_value(hand) == 8

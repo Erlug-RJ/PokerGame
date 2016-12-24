@@ -1,6 +1,8 @@
 defmodule Core.Ranking do
   import Core.RankingGuards, only: [is_sequence: 5]
 
+  def get_value([{10, s}, {11, s}, {12, s}, {13, s}, {14, s}]), do: 9
+
   def get_value([{a,s}, {b,s}, {c,s}, {d,s}, {e,s}]) when is_sequence(a, b, c, d, e), do: 8
 
   def get_value([{_a, _}, {b, _}, {b, _}, {b, _}, {b, _}]), do: 7
