@@ -3,14 +3,19 @@ defmodule Core.RankingTest do
   use Quixir
   alias Core.Ranking
 
-  test "this combination return 6 (Four of a Kind -> 8c, Ad, As, Ac, Ah)" do
-    hand = [{8, :clubs}, {8, :diamonds}, {8, :spades}, {8, :clubs}, {14, :hearts}]
-    assert Ranking.get_value(hand) == 6
+  test "this combination return 8 (Straight Flush -> 5c, 6c, 7c, 8c, 9c)" do
+    hand = [{5, :clubs}, {6, :clubs}, {7, :clubs}, {8, :clubs}, {9, :clubs}]
+    assert Ranking.get_value(hand) == 8
   end
 
-  test "this combination return 6 (Four of a Kind -> 8c, 8d, 8s, 8c, Ah)" do
+  test "this combination return 7 (Four of a Kind -> 8c, Ad, As, Ac, Ah)" do
+    hand = [{8, :clubs}, {8, :diamonds}, {8, :spades}, {8, :clubs}, {14, :hearts}]
+    assert Ranking.get_value(hand) == 7
+  end
+
+  test "this combination return 7 (Four of a Kind -> 8c, 8d, 8s, 8c, Ah)" do
     hand = [{8, :clubs}, {14, :diamonds}, {14, :spades}, {14, :clubs}, {14, :hearts}]
-    assert Ranking.get_value(hand) == 6
+    assert Ranking.get_value(hand) == 7
   end
 
   test "this combination return 5 (Flush -> 3c, 4c, 6c, 8c, Qc)" do
