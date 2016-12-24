@@ -18,6 +18,16 @@ defmodule Core.RankingTest do
     assert Ranking.get_value(hand) == 7
   end
 
+  test "this combination return 6 (Full House -> 10c, 10h, Ks, Kc, Kh)" do
+    hand = [{10, :clubs}, {10, :hearts}, {13, :spades}, {13, :clubs}, {13, :hearts}]
+    assert Ranking.get_value(hand) == 6
+  end
+
+  test "this combination return 6 (Full House -> 10c, 10h, 10s, Kc, Kh)" do
+    hand = [{10, :clubs}, {10, :hearts}, {10, :spades}, {13, :clubs}, {13, :hearts}]
+    assert Ranking.get_value(hand) == 6
+  end
+
   test "this combination return 5 (Flush -> 3c, 4c, 6c, 8c, Qc)" do
     hand = [{3, :clubs}, {4, :clubs}, {6, :clubs}, {8, :clubs}, {12, :clubs}]
     assert Ranking.get_value(hand) == 5
