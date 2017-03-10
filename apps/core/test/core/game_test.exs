@@ -27,4 +27,17 @@ defmodule Core.GameTest do
     end
   end
 
+  describe "tests dealing cards" do
+    setup do
+      {:ok, pid} = Game.start_link
+      pid
+      |> Game.add_player(%Player{name: "James ! = Thiago", hand: []})
+      |> Game.add_player(%Player{name: "Thiago ! = James", hand: []})
+      {:ok, %{pid: pid}}
+    end
+    test "table should have three cards", %{pid: pid} do
+      assert {:ok, table_cards } = Game.deal
+    end
+  end
+
 end

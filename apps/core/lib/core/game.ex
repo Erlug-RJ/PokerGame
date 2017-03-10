@@ -17,7 +17,7 @@ defmodule Core.Game do
     {:ok,
       %{
         players: [],
-        deck: Core.Deck.generate_deck,
+        deck: Core.Deck.generate_cards,
         table_cards: []
       }
     }
@@ -30,5 +30,13 @@ defmodule Core.Game do
 
   def handle_call({:get_players}, _from, state) do
     {:reply, {:ok, state.players}, state}
+  end
+
+  def handle_call({:deal_cards}, _from, state) do
+    {deck: deck } = state
+    [h1 | tails] = deck
+    [h2 | tails] = tails
+    [h3 | tails] = tails
+    %{:reply, {:ok, state, %{state | }}
   end
 end
